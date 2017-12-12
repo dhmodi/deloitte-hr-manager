@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title>Virtual Patient Assistant</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript">
+		$(document).ready(function() {
+		    loadVoices();
+		    window.speechSynthesis.onvoiceschanged = function() {
+                loadVoices();
+            };
+			$("#chatbox").keypress(function(event) {
+				if (event.which == 13) {
+					event.preventDefault();
+					//send();
+					newEntry();
+				}
+			});
+			$("#rec").click(function(event) {
+				switchRecognition();
+			});
+		$("#event").click(function(event) {
+
+	newEntry();
+		$.ajax({
+				type: "POST",
+				url: baseUrl + "contexts?sessionId=241187",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify([{ name: 'medication-followup', lifespan: 5 }]),
+			});
+	$.ajax({
+				type: "POST",
+				url: baseUrl + "query?v=20150910",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				headers: {
+					"Authorization": "Bearer " + accessToken
+				},
+				data: JSON.stringify({ event: { name: 'prescription_event', data: { 'doctor': 'Dr SAM', disease: 'Cold', medicine: 'CROCIN COLD & FLUMAX TABLETS', days: '20' } }, timezone: 'America/New_York', lang: 'en', sessionId: '241187'}),
+
+				success: function(data) {
+						setResponse(JSON.stringify(data, undefined, 2));
+					setAudioResponse(data);
+
+				},
+				error: function() {
+					setResponse("Internal Server Error");
+				}
+			});
+			});
+		});
+    </script>
+</head>
+<body>
+<div id='bodybox'>
+    <h1> Ask the Doctor - Your Personal Assistant</h1><br/>
+    <b>Select Voice: </b><select id="voiceSelect"></select>
+    <div id='chatborder'>
+        <p id="chatlog11" class="chatlog">&nbsp;</p>
+        <p id="chatlog10" class="chatlog">&nbsp;</p>
+        <p id="chatlog9" class="chatlog">&nbsp;</p>
+        <p id="chatlog7" class="chatlog">&nbsp;</p>
+        <p id="chatlog6" class="chatlog">&nbsp;</p>
+        <p id="chatlog5" class="chatlog">&nbsp;</p>
+        <p id="chatlog4" class="chatlog">&nbsp;</p>
+        <p id="chatlog3" class="chatlog">&nbsp;</p>
+        <p id="chatlog2" class="chatlog">&nbsp;</p>
+        <p id="chatlog1" class="chatlog">&nbsp;</p>
+        <input type="text" name="chat" id="chatbox" placeholder="Hi there! Type or Speak here to talk to me.">
+        <button id="rec"></button>
+
+
+    </div>
+    <button id="event">Use Case 2</button>
+
+    <!--	<div>
+             <input id="input" type="text"> <button id="rec">Speak</button>
+             <br>Response<br> <textarea id="response" cols="40" rows="20"></textarea>
+
+        </div>-->
+</div>
+</body>
+</html>

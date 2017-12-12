@@ -1,0 +1,7 @@
+Flask==0.12.2
+future==0.16.0
+apiai==1.2.3
+numpy==1.11.3
+psycopg2==2.7.3
+Flask-SocketIO==2.9.2
+pandas==0.20.3

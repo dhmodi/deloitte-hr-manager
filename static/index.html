@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Deloitte - Inventory Manager</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+        <a href="#!" class="brand-logo">
+            <img class="logo-img" src="deloittenew.jpg">
+          </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"></a></li>
+      </ul>
+            <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+
+    </div>
+    <div class="parallax"><img src="inventory.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+
+  <div class="row">
+      <div class="section">
+
+        <!--   Icon Section   -->
+        <!-- <div class="row">
+          <div class="col s12 m4">
+            <div class="icon-block">
+              <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+              <h5 class="center">Speeds up development</h5>
+
+              <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+            </div>
+          </div> -->
+
+          <div class="col s12 md12">
+            <div class="icon-block center">
+             
+              <div class="panel panel-default">
+                <div class="panel-heading "><h4 class="float-left">Charts</h4></div>
+                <div class="panel-body">
+                  <div class="jumbotron">
+                    <div class="container-fluid" id="chartshow">
+                       <div class="row">
+                        <div  class="col-lg-6 float-left panelstyle" style="display:inline-block" id="barchart"></div>
+                         <div class="col-lg-6 float-right panelstyle" style="display:inline-block" id="linechart"></div>
+                       </div>
+                       <div class="row">
+                        <div class="col-lg-6 float-left panelstyle " style="display:inline-block" id="piechart"></div>
+                        <div class="col-lg-6 float-right panelstyle" style="display:inline-block" id="doughnut"></div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>  
+            
+            
+              <h2 class="center brown-text"><i class="material-icons">group</i>
+              </h2>
+             <a class="waves-effect btn  waves-light color btn center " >Contact Us</a>                   
+              <div id="modal1"  class="modal fade slide-right">
+                  <div class="modal-content  col s12 md2">
+              <div class="row">
+               <div class=".col .s12 .md4 .l5">
+                <div  class="scrollspy section">
+                  <div class="grid-container">
+                    <h5 class="header"> Inventory Manager </h5>
+
+                      <p style="float:left;margin-right:2px;"> Select Voice  </p>
+                      <div class="input-field col s9 rmargin">
+                          <select  ></select>
+                      </div>
+
+                        <div class="precontainer">
+                          <p id="chatlog10" class=" left-align leftspace">&nbsp;</p>
+                          <p id="chatlog9" class="left-align    leftspace">&nbsp;</p>
+                          <p id="chatlog8" class=" left-align   leftspace">&nbsp;</p>
+                          <p id="chatlog7" class="left-align    leftspace">&nbsp;</p>
+                          <p id="chatlog6" class=" left-align   leftspace">&nbsp;</p>
+                          <p id="chatlog5" class=" left-align   leftspace">&nbsp;</p>
+                          <p id="chatlog4" class="left-align    leftspace">&nbsp;</p>
+                          <p id="chatlog3" class="left-align    leftspace">&nbsp;</p>
+                          <p id="chatlog2" class=" left-align   leftspace">&nbsp;</p>
+                          <p id="chatlog1" class=" left-align   leftspace">&nbsp;</p>
+                          <div class="row">
+                              <div class="left input-field col s12 m10">
+                                <input class="left" id="chatbox" type="text">
+                                <label class="left leftspace" for="chatbox " id="palceholder">Hi there! Type or Speak here to talk to me.</label>
+                              </div>
+                              <!-- <div class="col s2"> <i class="large material-icons">insert_chart</i></div> -->
+                              <div class="col s2 icon-container padding">
+                                <a id="rec" class="btn-floating center btncolour btn-large">
+                                  <i class="material-icons small  ">mic</i></a></div>
+                               
+                            </div>
+                          </div>
+                          <a class="waves-effect margin-top waves-light btn">close</a>
+
+                  </div>
+
+                </div>
+              </div>
+              </div>
+                  </div>
+                </div>
+
+        </div>
+
+      </div>
+    </div>
+        </div>
+     
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+      <a id="modalopen" href="#modal1" class="btn-floating modal-trigger btn-large">
+        <i class="material-icons ">headset_mic</i>
+      </a>
+  </div>
+
+  <footer class="page-footer background teal">
+
+   </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/functions.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+  <script  src="js/fusioncharts.js"></script>
+  <script  src="js/themes/fusioncharts.theme.fint.js"></script>
+  </body>
+</html>
