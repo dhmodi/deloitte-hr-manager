@@ -37,7 +37,7 @@ parser = ""
 
 import os
 currDir = os.getcwd()
-ORACLE_HOME = os.path.join(currDir,"instantclient_12_2")
+ORACLE_HOME = os.path.join(currDir,"lib")
 PATH = os.environ.get('LD_LIBRARY_PATH')
 os.environ['ORACLE_HOME'] = ORACLE_HOME
 os.environ['LD_LIBRARY_PATH'] = ORACLE_HOME + ";" + PATH

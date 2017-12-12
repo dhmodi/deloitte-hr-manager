@@ -4,7 +4,7 @@
 import os, sys, getopt
 import unicodedata
 import importlib
-
+from cognitiveSQL.HashMap import hashMap_columns
 from cognitiveSQL.Database import Database
 from cognitiveSQL.LangConfig import LangConfig
 from cognitiveSQL.Parser import Parser
@@ -113,6 +113,13 @@ def main(argv):
                 thesaurus_path = str(thesaurus_path)
             if json_output_path is not None:
                 json_output_path = str(json_output_path)
+
+        # Calling the function
+        sentence = 'this is a foo bar sentences and i want to ngramize it'
+        hashColumn_csv = 'alias\synonyms.csv'
+
+        print(hashMap_columns(sentence, hashColumn_csv))
+
 
         #try:
         ln2sql(str(database_path), str(input_sentence), str(language_path), thesaurus_path, json_output_path)
