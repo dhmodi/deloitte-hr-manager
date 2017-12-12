@@ -35,6 +35,13 @@ import apiai
 app = Flask(__name__, static_url_path='')
 parser = ""
 
+import os
+currDir = os.getcwd()
+ORACLE_HOME = os.path.join(currDir,"instantclient_12_2")
+PATH = os.environ.get('PATH')
+os.environ['ORACLE_HOME'] = ORACLE_HOME
+os.environ['PATH'] = ORACLE_HOME + ";" + PATH
+
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
 conn = cx_Oracle.connect(user="C##DAOHCM", password="C##DAOHCM", dsn=dsnStr)
