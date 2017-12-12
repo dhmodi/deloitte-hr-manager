@@ -38,9 +38,9 @@ parser = ""
 import os
 currDir = os.getcwd()
 ORACLE_HOME = os.path.join(currDir,"instantclient_12_2")
-PATH = os.environ.get('PATH')
+PATH = os.environ.get('LD_LIBRARY_PATH')
 os.environ['ORACLE_HOME'] = ORACLE_HOME
-os.environ['PATH'] = ORACLE_HOME + ";" + PATH
+os.environ['LD_LIBRARY_PATH'] = ORACLE_HOME + ";" + PATH
 
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
