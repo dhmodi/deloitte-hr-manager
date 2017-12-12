@@ -37,7 +37,8 @@ parser = ""
 
 import os
 currDir = os.getcwd()
-ORACLE_HOME = os.path.join(currDir,"lib")
+print(currDir)
+ORACLE_HOME = "/app/deloitte-hr-manager/lib"
 PATH = os.environ.get('LD_LIBRARY_PATH')
 os.environ['ORACLE_HOME'] = ORACLE_HOME
 os.environ['LD_LIBRARY_PATH'] = ORACLE_HOME + ";" + PATH
