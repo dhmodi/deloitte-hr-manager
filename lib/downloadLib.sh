@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /app/lib
 
 wget https://www.dropbox.com/s/ewjv4dy3mprzauv/libclntsh.so
 
