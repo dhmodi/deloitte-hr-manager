@@ -61,7 +61,7 @@ class Database:
             tables_string = [p.split(';')[0] for p in content.split('CREATE') if ';' in p]
             for table_string in tables_string:
                 if 'TABLE' in table_string:
-                    table = self.create_table(table_string)
+                    table = self.create_table(table_string.lower())
                     self.add_table(table)
 
     def predict_type(self, string):
@@ -78,10 +78,10 @@ class Database:
         lines = table_string.split("\n")
         table = Table.Table()
         for line in lines:
-            if 'TABLE' in line:
+            if 'TABLE' in line.upper():
                 table_name = re.search("`(\w+)`", line)
                 table.set_name(table_name.group(1))
-            elif 'PRIMARY KEY' in line:
+            elif 'PRIMARY KEY' in line.upper():
                 primary_key_columns = re.findall("`(\w+)`", line)
                 for primary_key_column in primary_key_columns:
                     table.add_primary_key(primary_key_column)
