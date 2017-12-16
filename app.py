@@ -24,6 +24,8 @@ import cognitiveSQL.StopwordFilter as StopwordFilter
 
 # Flask app should start in global layout
 app = Flask(__name__, static_url_path='')
+socketio = SocketIO(app)
+
 parser = ""
 
 
@@ -32,7 +34,7 @@ parser = ""
 # ORACLE_HOME = os.path.join(currDir,'lib')
 # PATH = os.environ.get('LD_LIBRARY_PATH')
 # os.environ['LD_LIBRARY_PATH'] = ORACLE_HOME + ":" + PATH
-subprocess.call(['sh','downloadLib.sh'])
+# subprocess.call(['sh','downloadLib.sh'])
 
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
