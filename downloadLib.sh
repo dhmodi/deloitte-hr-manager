@@ -7,4 +7,4 @@ cp libclntsh.so libclntsh.so.12.1
 
 wget https://www.dropbox.com/s/565uig6mfoj30g4/libociei.so
 
-export LD_LIBRARY_PATH=/app/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/app/lib/

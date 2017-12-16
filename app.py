@@ -33,8 +33,8 @@ parser = ""
 # print(currDir)
 # ORACLE_HOME = os.path.join(currDir,'lib')
 # PATH = os.environ.get('LD_LIBRARY_PATH')
-os.environ['LD_LIBRARY_PATH'] = "/app/lib:" + os.environ['LD_LIBRARY_PATH']
-# subprocess.call(['sh','downloadLib.sh'])
+os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
+subprocess.call(['sh','downloadLib.sh'])
 
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
