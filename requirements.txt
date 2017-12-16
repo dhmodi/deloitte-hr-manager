@@ -5,4 +5,4 @@ numpy==1.11.3
 psycopg2==2.7.3
 Flask-SocketIO==2.9.2
 pandas==0.20.3
-cx_Oracle==6.0.3
+nltk==3.2.5
