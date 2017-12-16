@@ -13,7 +13,7 @@ from flask import request
 from flask import make_response
 from flask import url_for, redirect
 from flask_socketio import SocketIO, send, emit
-
+import subprocess
 
 import cognitiveSQL.Database as Database
 import cognitiveSQL.LangConfig as LangConfig
@@ -26,9 +26,10 @@ import cognitiveSQL.StopwordFilter as StopwordFilter
 app = Flask(__name__, static_url_path='')
 parser = ""
 
+
 currDir = os.getcwd()
 print(currDir)
-ORACLE_HOME = os.path.join(currDir,"lib")
+ORACLE_HOME = os.path.join(currDir,'lib')
 PATH = os.environ.get('LD_LIBRARY_PATH')
 os.environ['ORACLE_HOME'] = ORACLE_HOME
 os.environ['LD_LIBRARY_PATH'] = ORACLE_HOME + ":" + PATH
