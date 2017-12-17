@@ -31,6 +31,7 @@ class StopwordFilter:
 
     def load(self, lang):
         with open('cognitiveSQL/stopwords/' + lang + '.txt', encoding='utf8') as f:
+        #with open('stopwords/' + lang + '.txt', encoding='utf8') as f:
             lines = f.read().split('\n')
             for word in lines:
                 stopword = self.remove_accents(word).lower()

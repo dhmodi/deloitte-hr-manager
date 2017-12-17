@@ -28,13 +28,18 @@ socketio = SocketIO(app)
 
 parser = ""
 
+#### if WINDOWS
+import os
+currDir = os.getcwd()
+print(currDir)
+ORACLE_HOME = os.path.join(currDir,"lib")
+PATH = os.environ.get('PATH')
+os.environ['ORACLE_HOME'] = ORACLE_HOME
+os.environ['PATH'] = ORACLE_HOME + ";" + PATH
 
-# currDir = os.getcwd()
-# print(currDir)
-# ORACLE_HOME = os.path.join(currDir,'lib')
-# PATH = os.environ.get('LD_LIBRARY_PATH')
-os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
-subprocess.call(['sh','downloadLib.sh'])
+#### if LINUX
+# os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
+# subprocess.call(['sh','downloadLib.sh'])
 
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
@@ -235,7 +240,7 @@ def processRequest(req):
 if __name__ == '__main__':
     database = Database.Database()
     database.load("cognitiveSQL/database/HCM.sql")
-    #database.print_me()
+    # database.print_me()
 
     config = LangConfig.LangConfig()
     config.load("cognitiveSQL/lang/english.csv")

@@ -101,7 +101,7 @@ class SelectParser(Thread):
 
     def join(self):
         #Thread.join(self)
-        print("Leaving Select")
+        #print("Leaving Select")
         return self.select_objects
 
 class FromParser(Thread):
@@ -225,9 +225,9 @@ class FromParser(Thread):
                 self.queries = None
 
     def join(self):
-        print("Inside From")
+        #print("Inside From")
         #Thread.join(self)
-        print("Leaving From")
+        #print("Leaving From")
         #print(self.queries)
         return self.queries
 
@@ -366,6 +366,7 @@ class WhereParser(Thread):
                 for table in self.database_dico:
                     if phrase[i] in self.database_dico[table]:
                         number_of_where_columns += 1
+                        #columns_of_where.append("lower("+phrase[i]+")")
                         columns_of_where.append(phrase[i])
                         offset_of[phrase[i]] = i
                         column_offset.append(i)
@@ -394,8 +395,8 @@ class WhereParser(Thread):
                         self.disjunction_keyword_offset.append(i)
                     elif phrase[i] in self.negation_keywords: # between the column and the equal, greater or less keyword
                         self.negation_keyword_offset.append(i)
-                        #elif phrase[i] in self.stop_words:
-                        #print("Stop Words" + phrase[i])
+                    elif phrase[i] in self.stop_words:
+                        print("Stop Words" + phrase[i])
                     else:
                         # print("Values" + phrase[i])
                         self.value_offset.append(i)
@@ -415,7 +416,7 @@ class WhereParser(Thread):
                 else:
                     _next = column_offset[i+1]
                 junction = self.predict_junction(previous, current)
-                column = self.get_column_name_with_alias_table(columns_of_where[i], table_of_from)
+                column = "lower(" + self.get_column_name_with_alias_table(columns_of_where[i], table_of_from) + ")"
                 operation_type = self.predict_operation_type(previous, current)
                 value = str(self.get_value(current, _next))
                 # print("Value" + str(value))
@@ -428,7 +429,7 @@ class WhereParser(Thread):
 
     def join(self):
         #Thread.join(self)
-        print("Leaving Where")
+        #print("Leaving Where")
         return self.where_objects
 
 class GroupByParser(Thread):
@@ -506,7 +507,7 @@ class OrderByParser(Thread):
 
     def join(self):
         #Thread.join(self)
-        print("Leaving order")
+        #print("Leaving order")
         return self.order_by_objects
 
 class Parser:
@@ -566,6 +567,7 @@ class Parser:
         where_phrase = ''
 
         hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
+        #hashColumn_csv = 'alias/synonyms.csv'
         input_sentence = hashMap_columns(sentence, hashColumn_csv)
         print(input_sentence)
         words = re.findall(r"[\w]+", self.remove_accents(input_sentence))
@@ -599,15 +601,15 @@ class Parser:
         if (number_of_select_column + number_of_table + number_of_where_column) == 0:
             raise ParsingException("No keyword found in sentence!")
 
-        if len(tables_of_from) == 0:
-            select_phrase = words[0:]
-            where_phrase = words[len(select_phrase) + len(from_phrase):]
-            for table in self.database_dico:
-                for column in columns_of_select:
-                    if column in self.database_dico[table]:
-                        tables_of_from.append(table)
-                        from_phrase = table.split(",")
-                        number_of_table +=1
+        # if len(tables_of_from) == 0:
+        #     select_phrase = words[0:]
+        #     where_phrase = words[len(select_phrase) + len(from_phrase):]
+        #     for table in self.database_dico:
+        #         for column in columns_of_select:
+        #             if column in self.database_dico[table]:
+        #                 tables_of_from.append(table)
+        #                 from_phrase = table.split(",")
+        #                 number_of_table +=1
 
         if len(tables_of_from) > 0:
             from_phrases = []
@@ -686,7 +688,7 @@ class Parser:
             group_by_phrase.append(where_phrase[previous_index:])
         else:
             new_where_phrase.append(where_phrase)
-
+        print(new_where_phrase)
 
         select_parser = SelectParser(columns_of_select, tables_of_from, select_phrase, self.count_keywords, self.sum_keywords, self.average_keywords, self.max_keywords, self.min_keywords, self.database_dico)
         from_parser = FromParser(tables_of_from, columns_of_select, columns_of_where, self.database_object)

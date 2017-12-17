@@ -58,14 +58,14 @@ class Database:
     def load(self, path):
         with open(path) as f:
             content = f.read()
-            tables_string = [p.split(';')[0] for p in content.split('CREATE') if ';' in p]
+            tables_string = [p.split(';')[0] for p in content.split('CREATE ') if ';' in p]
             for table_string in tables_string:
                 if 'TABLE' in table_string:
                     table = self.create_table(table_string.lower())
                     self.add_table(table)
 
     def predict_type(self, string):
-        if 'int' in string.lower():
+        if 'int' in string.lower() or 'number' in string.lower() :
             return 'int'
         elif 'char' in string.lower() or 'text' in string.lower():
             return 'string'

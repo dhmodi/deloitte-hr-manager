@@ -1,2 +1,4 @@
 person_id,head count,headcount,employees,employee
-count,total number
+count,how many,total number
+nationality,can speak,speak,speaking
+no_of_positions,job openings,open positions
