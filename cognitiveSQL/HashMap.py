@@ -1,6 +1,7 @@
 import nltk
 from nltk import ngrams
 from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
 #nltk.data.path.append('cognitiveSQL\nltk')
 
 def hashMap_columns(sentence, hashColumn_csv):
@@ -18,7 +19,6 @@ def hashMap_columns(sentence, hashColumn_csv):
         for row in reader:
             for i in ngramsList:
                 j=" ".join(i)
-
                 if(j in row[1:]):
                     idx=(ngramsList).index(i)
                     words[idx] = row[0]

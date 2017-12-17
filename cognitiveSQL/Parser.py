@@ -202,6 +202,7 @@ class FromParser(Thread):
         self.queries = []
 
         for table_of_from in self.tables_of_from:
+            print(table_of_from)
             links = []
             query = Query()
             query.set_from(From(table_of_from))
@@ -601,15 +602,15 @@ class Parser:
         if (number_of_select_column + number_of_table + number_of_where_column) == 0:
             raise ParsingException("No keyword found in sentence!")
 
-        # if len(tables_of_from) == 0:
-        #     select_phrase = words[0:]
-        #     where_phrase = words[len(select_phrase) + len(from_phrase):]
-        #     for table in self.database_dico:
-        #         for column in columns_of_select:
-        #             if column in self.database_dico[table]:
-        #                 tables_of_from.append(table)
-        #                 from_phrase = table.split(",")
-        #                 number_of_table +=1
+        if len(tables_of_from) == 0:
+            select_phrase = words[0:]
+            where_phrase = words[len(select_phrase) + len(from_phrase):]
+            for table in self.database_dico:
+                for column in columns_of_select:
+                    if column in self.database_dico[table]:
+                        tables_of_from.append(table)
+                        from_phrase = table.split(",")
+                        number_of_table +=1
 
         if len(tables_of_from) > 0:
             from_phrases = []
