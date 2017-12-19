@@ -4,4 +4,4 @@ person_id dao_hcm_w_employee_d,employees,employee
 state_name dao_hcm_w_busn_location_d,state
 country_code,country
 us,United States
-headcount
+sum,how many,total number
