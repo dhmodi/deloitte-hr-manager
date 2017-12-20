@@ -1,8 +1,7 @@
-sum,how many,total number
+sum,total number
 nationality,can speak,speak,speaking
 no_of_positions dao_hcm_w_recruitment_d,job openings,open positions
 person_id dao_hcm_w_employee_d,employees,employee
 state_name dao_hcm_w_busn_location_d,state
 country_code,country
 us,United States
-sum,how many,total number
