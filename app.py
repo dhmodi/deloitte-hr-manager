@@ -20,6 +20,8 @@ import cognitiveSQL.LangConfig as LangConfig
 import cognitiveSQL.Parser as Parser
 import cognitiveSQL.Thesaurus as Thesaurus
 import cognitiveSQL.StopwordFilter as StopwordFilter
+from cognitiveSQL.HashMap import hashMap_columns
+
 
 
 # Flask app should start in global layout
@@ -37,7 +39,7 @@ parser = ""
 # os.environ['ORACLE_HOME'] = ORACLE_HOME
 # os.environ['PATH'] = ORACLE_HOME + ";" + PATH
 
-#### if LINUX
+### if LINUX
 os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
 subprocess.call(['sh','downloadLib.sh'])
 
@@ -175,7 +177,11 @@ def processRequest(req):
         print("InventorySearch")
         incoming_query = req.get("request").get("intent").get("slots").get("message").get("value")
         print(incoming_query)
-        queries = parser.parse_sentence(str(incoming_query).lower())
+        hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
+        (input_sentence,OutMap) = hashMap_columns(str(incoming_query).lower(), hashColumn_csv)
+        print(OutMap)
+        print(input_sentence)
+        queries = parser.parse_sentence(input_sentence)
         # queries = parser.parse_sentence(incoming_query)
         # print(query for query in queries)
         queryString = ""
@@ -212,8 +218,10 @@ def processRequest(req):
                     print("The Operation is " + str(operation))
                     outText = outText + operation + " of " + table + " is " + value
                 else:
+                    #operation = OutMap.get(str(operation).lower())
+                    column = OutMap.get(column)
                     print("The Operation is " + str(operation))
-                    outText = outText + operation + " of " + column + " is " + value
+                    outText = outText + str(operation).lower() + " of " + str(column) + " is " + value
                 if (isLast is not 0):
                     outText = outText + " and the "
                     count = count + 1

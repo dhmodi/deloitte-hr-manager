@@ -567,10 +567,7 @@ class Parser:
         from_phrase = ''
         where_phrase = ''
 
-        hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
-        input_sentence = hashMap_columns(sentence, hashColumn_csv)
-        print(input_sentence)
-        words = re.findall(r"[\w]+", self.remove_accents(input_sentence))
+        words = re.findall(r"[\w]+", self.remove_accents(sentence))
         #print(str(self.database_dico))
         for i in range(0, len(words)):
             # print(words[i])
