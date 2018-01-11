@@ -254,8 +254,10 @@ class Where():
 		if len(self.conditions) >= 1:
 			for i in range(0, len(self.conditions)):
 				if i == 0:
+					print(str(self.conditions[i][1]))
 					string += ' WHERE' + ' ' + str(self.conditions[i][1])
 				else:
+					print(str(self.conditions[i][0]) + ' ' + str(self.conditions[i][1]))
 					string += str(self.conditions[i][0]) + ' ' + str(self.conditions[i][1])
 			return string
 		else:

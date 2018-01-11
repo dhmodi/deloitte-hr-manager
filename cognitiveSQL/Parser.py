@@ -425,6 +425,9 @@ class WhereParser(Thread):
                     value = "'" + value + "'"
                 #value = 'OOV' # Out Of Vocabulary: feature not implemented yet
                 operator = self.predict_operator(current, _next)
+                if (operation_type == "MAX" or operation_type == "MIN"):
+                    value = "(SELECT " + operation_type + "(" + column + ") from " + table_of_from + str(where_object) + ")"
+                    operation_type = None
                 where_object.add_condition(junction, Condition(column, operation_type, operator, value))
             self.where_objects.append(where_object)
 

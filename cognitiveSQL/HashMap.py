@@ -50,6 +50,8 @@ def hashMap_columns(sentence, hashColumn_csv):
                     # idx=(ngramsList).index(i)
                     words[idx] = row[0]
                     OutMap[row[0]] = j
+                    for wrd in str(row[0]).split(" "):
+                        OutMap[wrd] = j
                     continue
 
     output = " ".join(words)
