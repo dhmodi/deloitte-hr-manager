@@ -226,13 +226,20 @@ def processRequest(req):
         print(minRecord)
         socketio.emit('chartdata', final_json)
         outText = "The " + xAxis + " " + str(maxRecord['label'].values[0]) + " has maximum " + yAxis + " while the " + xAxis + " " + str(minRecord['label'].values[0]) + " has minimum " + yAxis
-        return {
-            "speech": outText,
-            "displayText": outText,
-            # "data": data,
-            # "contextOut": [],
-            "source": "Dhaval"
-        }
+        # return {
+        #     "speech": outText,
+        #     "displayText": outText,
+        #     # "data": data,
+        #     # "contextOut": [],
+        #     "source": "Dhaval"
+        # }
+
+        print(outText)
+        with open("response/alexa_response.json", 'r') as f:
+            alexaResponse = json.load(f)
+
+        alexaResponse["response"]["outputSpeech"]["text"] = outText
+        return alexaResponse
 
 if __name__ == '__main__':
     database = Database.Database()
