@@ -241,6 +241,54 @@ def processRequest(req):
         alexaResponse["response"]["outputSpeech"]["text"] = outText
         return alexaResponse
 
+    elif (req.get("result").get("action") == "show.visualization"):
+        print("Inventory Visualization")
+        incoming_query = req.get("result").get("resolvedQuery")
+        print(incoming_query)
+        chartType = req.get("result").get("parameters").get("chart-type")
+        print(chartType)
+        queries = parser.parse_sentence(incoming_query.lower())
+        print(query for query in queries)
+        queryString = ""
+        table = ""
+        for query in queries:
+            table = query.get_from().get_table()
+            columns = query.get_select().get_columns()
+            queryString = queryString + str(query)
+        print(queryString)
+        cur = conn.cursor()
+        cur.execute(queryString)
+        rows = cur.fetchall()
+        print(rows)
+        print(list(columns))
+        xAxis = columns[0][0].split('.')[1]
+        yAxis = columns[1][0].split('.')[1]
+        print(xAxis)
+        df = pd.DataFrame(list(rows), columns = ["label", "value"])
+        agg_df = df.groupby(['label'], as_index=False).agg({"value": "sum"})
+        agg_df['label'] = agg_df['label'].astype('str')
+        agg_df['value'] = agg_df['value'].astype('str')
+        chartData = agg_df.to_json(orient='records')
+        # chartData = [{"label": str(row[0]), "value": str(row[1])} for row in rows]
+        print (chartData)
+        # chartData = json.dumps(chartData)
+        # final_json = '[ { "type":"' + chartType + '", "chartcontainer":"barchart", "caption":"' + chartType + ' chart showing ' + xAxis + ' vs ' + yAxis + '", "subCaption":"", "xAxisName":"xAxis", "yAxisName":"yAxis","source":[ { "label": "Mon", "value": "15123" }, { "label": "Tue", "value": "14233" }, { "label": "Wed", "value": "23507" }, { "label": "Thu", "value": "9110" }, { "label": "Fri", "value": "15529" }, { "label": "Sat", "value": "20803" }, { "label": "Sun", "value": "19202" } ]}]'
+        final_json = '[ { "type":"' + chartType + '", "chartcontainer":"barchart", "caption":"A ' + chartType + ' chart showing ' + xAxis + ' vs ' + yAxis + '", "subCaption":"", "xAxisName":"' + xAxis + '", "yAxisName":"' + yAxis + '", "source":' + chartData + '}]'
+        print(final_json)
+        maxRecord = agg_df.ix[agg_df['value'].idxmax()].to_frame().T
+        print(maxRecord)
+        minRecord = agg_df.ix[agg_df['value'].idxmin()].to_frame().T
+        print(minRecord)
+        socketio.emit('chartdata', final_json)
+        outText = "The " + xAxis + " " + str(maxRecord['label'].values[0]) + " has maximum " + yAxis + " while the " + xAxis + " " + str(minRecord['label'].values[0]) + " has minimum " + yAxis
+        return {
+            "speech": outText,
+            "displayText": outText,
+            # "data": data,
+            # "contextOut": [],
+            "source": "Dhaval"
+        }
+
 if __name__ == '__main__':
     database = Database.Database()
     database.load("cognitiveSQL/database/HCM.sql")
