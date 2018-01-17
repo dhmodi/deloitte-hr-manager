@@ -80,6 +80,7 @@ def webhook():
 
 
 def processRequest(req):
+    print(req)
     if (req.get("request").get("intent").get("name") == "InventorySearch"):
         print("InventorySearch")
         incoming_query = req.get("request").get("intent").get("slots").get("message").get("value")
