@@ -99,10 +99,10 @@ $(document).ready(function() {
 			//	console.log(typeof chartdatum);	
 				var visitChart = new FusionCharts({
 					type: chartdatum.type,
-					id:chartdatum.chartcontainer+"-",
+					id:chartdatum.chartcontainer,
 					renderer : 'javascript',
 					renderAt: chartdatum.chartcontainer,
-					width: "100%",
+					width: "1000",
 					height: "500",
 					dataFormat: 'json',
 					dataSource:{
