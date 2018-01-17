@@ -102,8 +102,8 @@ $(document).ready(function() {
 					id:chartdatum.chartcontainer,
 					renderer : 'javascript',
 					renderAt: chartdatum.chartcontainer,
-					width: '1200px',
-					height: '400px',
+					width: '1400px',
+					height: '700px',
 					dataFormat: 'json',
 					dataSource:{
 						"chart": {
