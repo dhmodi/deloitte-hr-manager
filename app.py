@@ -310,7 +310,7 @@ if __name__ == '__main__':
     parser = Parser.Parser(database, config)
     from os import sys, path
     sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-    port = int(os.getenv('PORT', 5000))
+    port = int(os.getenv('PORT', 5001))
 
     print("Starting app on port %d" % port)
 
