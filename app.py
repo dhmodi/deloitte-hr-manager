@@ -298,7 +298,62 @@ def processRequest(req):
             # "contextOut": [],
             "source": "Dhaval"
         }
+    elif (req.get("result").get("action") == "inventory.search"):
+        print("Inventory Search")
+        incoming_query = req.get("result").get("resolvedQuery")
+        queries = parser.parse_sentence(incoming_query.lower())
+        #print(query for query in queries)
+        queryString = ""
+        table = ""
+        for query in queries:
+            table = query.get_from().get_table()
+            columns = query.get_select().get_columns()
+            queryString = queryString + str(query)
 
+        print(table)
+        print(list(columns))
+        # xAxis = columns[0][0].split('.')[1]
+        # yAxis = columns[1][0].split('.')[1]
+        print(queryString)
+        cur = conn.cursor()
+        cur.execute(queryString)
+        rows = cur.fetchall()
+
+        # outText = ', '.join(str(x) for x in rows[0])
+        # outText = ', '.join(str(element).split(".")[0] for row in rows for element in row)
+        count = 0
+
+        outText = "The "
+        for row in rows:
+            isLast = len(row)
+            for element in row:
+                isLast = isLast - 1
+                value = str(element).split(".")[0]
+                if (columns[count][0] is not None):
+                    # print(columns)
+                    column = columns[count][0].split('.')[1]
+                operation = columns[count][1]
+                if (operation is None):
+                    print("The Operation is None")
+                    outText = outText + column + " is " + value
+                elif (operation is "COUNT"):
+                    print("The Operation is " + str(operation))
+                    outText = outText + operation + " of " + table + " is " + value
+                else:
+                    print("The Operation is " + str(operation))
+                    outText = outText + operation + " of " + column + " is " + value
+                if (isLast is not 0):
+                    outText = outText + " and the "
+                    count = count + 1
+        # print(','.join(str(element) for row in rows for element in row))
+
+        return {
+            "speech": outText,
+            "displayText": outText,
+            # "data": data,
+            # "contextOut": [],
+            "source": "Dhaval"
+        }
 if __name__ == '__main__':
     database = Database.Database()
     database.load("cognitiveSQL/database/HCM.sql")
