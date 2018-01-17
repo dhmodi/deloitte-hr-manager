@@ -241,7 +241,7 @@ def processRequest(req):
         minRecord = agg_df.ix[agg_df['value'].idxmin()].to_frame().T
         print(minRecord)
         socketio.emit('chartdata', final_json)
-        outText = "The " + xAxis + " " + str(maxRecord['label'].values[0]) + " has maximum " + yAxis + " while the " + xAxis + " " + str(minRecord['label'].values[0]) + " has minimum " + yAxis
+        outText = "The " + xAxis + " " + str(maxRecord['label'].values[0]) + " has maximum " + yAxis + " while the " + xAxis + " " + str(minRecord['label'].values[0]) + " has minimum " + yAxis + ". Refer to the screen for more details."
         # return {
         #     "speech": outText,
         #     "displayText": outText,
