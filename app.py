@@ -218,6 +218,8 @@ def processRequest(req):
         print(list(columns))
         xAxis = columns[0][0].split('.')[1]
         yAxis = columns[1][0].split('.')[1]
+        xAxis = OutMap.get(xAxis) if OutMap.get(xAxis) else xAxis
+        yAxis = OutMap.get(yAxis) if OutMap.get(yAxis) else yAxis
         print(xAxis)
         df = pd.DataFrame(list(rows), columns = ["label", "value"])
         df['value'] = df['value'].fillna(0)
@@ -272,6 +274,7 @@ def processRequest(req):
         rows = cur.fetchall()
         print(rows)
         print(list(columns))
+
         xAxis = columns[0][0].split('.')[1]
         yAxis = columns[1][0].split('.')[1]
         print(xAxis)
