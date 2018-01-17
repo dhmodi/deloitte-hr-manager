@@ -189,7 +189,7 @@ def processRequest(req):
 
     elif (req.get("request").get("intent").get("name") == "InventoryVisualization"):
         print("Inventory Visualization")
-        chartType = "bar"
+        chartType = "line"
         incoming_query = req.get("request").get("intent").get("slots").get("message").get("value")
         print(incoming_query)
         hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
@@ -371,4 +371,4 @@ if __name__ == '__main__':
     print("Starting app on port %d" % port)
 
     #app.run(debug=True, port=port, host='0.0.0.0')
-    socketio.run(app, debug=True, port=port, host='0.0.0.0')
+    socketio.run(app, debug=True, port=port, host='localhost')
