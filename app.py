@@ -371,4 +371,4 @@ if __name__ == '__main__':
     print("Starting app on port %d" % port)
 
     #app.run(debug=True, port=port, host='0.0.0.0')
-    socketio.run(app, debug=True, port=port, host='localhost')
+    socketio.run(app, debug=True, port=port, host='0.0.0.0')
