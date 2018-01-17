@@ -195,6 +195,8 @@ def processRequest(req):
         chartType = req.get("request").get("intent").get("slots").get("charttypeslot").get("value")
         if (chartType == "bar"):
             chartType = "column2d"
+        elif (chartType is None):
+            chartType = "line"
         hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
         (input_sentence,OutMap) = hashMap_columns(str(incoming_query).lower(), hashColumn_csv)
         print(OutMap)
@@ -224,6 +226,8 @@ def processRequest(req):
         xAxis = OutMap.get(xAxis) if OutMap.get(xAxis) else xAxis
         yAxis = OutMap.get(yAxis) if OutMap.get(yAxis) else yAxis
         print(xAxis)
+        print(yAxis)
+        print(chartType)
         df = pd.DataFrame(list(rows), columns = ["label", "value"])
         df['value'] = df['value'].fillna(0)
         agg_df = df.groupby(['label'], as_index=False).agg({"value": "sum"})

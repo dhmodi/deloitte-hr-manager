@@ -35,6 +35,13 @@ class SelectParser(Thread):
                 tmp_table.append(table)
         return tmp_table
 
+    def find_word(self, text, search):
+        result = re.findall('\\b'+search+'\\b', text, flags=re.IGNORECASE)
+        if len(result)>0:
+            return True
+        else:
+            return False
+
     def get_column_name_with_alias_table(self, column, table_of_from):
         one_table_of_column = self.get_tables_of_column(column)[0]
         tables_of_column = self.get_tables_of_column(column)
@@ -77,7 +84,10 @@ class SelectParser(Thread):
                         if keyword in phrase:
                             select_type = 'AVG'
                     for keyword in self.count_keywords:
-                        if keyword in phrase:
+                        #if keyword in phrase:
+                        print("Select " + phrase)
+                        if self.find_word(phrase,keyword):
+                            print("Found match - " + keyword + " - " + phrase)
                             select_type = 'COUNT'
                     for keyword in self.max_keywords:
                         if keyword in phrase:
