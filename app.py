@@ -231,6 +231,9 @@ def processRequest(req):
         df = pd.DataFrame(list(rows), columns = ["label", "value"])
         df['value'] = df['value'].fillna(0)
         agg_df = df.groupby(['label'], as_index=False).agg({"value": "sum"})
+        maxRecord = agg_df.ix[agg_df['value'].idxmax()].to_frame().T
+        agg_df = agg_df.reset_index()
+        minRecord = agg_df.ix[agg_df['value'].idxmin()].to_frame().T
         agg_df['label'] = agg_df['label'].astype('str')
         agg_df['value'] = agg_df['value'].astype('str')
         chartData = agg_df.to_json(orient='records')
@@ -240,14 +243,10 @@ def processRequest(req):
         # final_json = '[ { "type":"' + chartType + '", "chartcontainer":"barchart", "caption":"' + chartType + ' chart showing ' + xAxis + ' vs ' + yAxis + '", "subCaption":"", "xAxisName":"xAxis", "yAxisName":"yAxis","source":[ { "label": "Mon", "value": "15123" }, { "label": "Tue", "value": "14233" }, { "label": "Wed", "value": "23507" }, { "label": "Thu", "value": "9110" }, { "label": "Fri", "value": "15529" }, { "label": "Sat", "value": "20803" }, { "label": "Sun", "value": "19202" } ]}]'
         final_json = '[ { "type":"' + chartType + '", "chartcontainer":"barchart", "caption":"A ' + chartType + ' chart showing ' + xAxis + ' vs ' + yAxis + '", "subCaption":"", "xAxisName":"' + xAxis + '", "yAxisName":"' + yAxis + '", "source":' + chartData + '}]'
         print(final_json)
-        agg_df = agg_df.reset_index()
-        maxRecord = agg_df.ix[agg_df['value'].idxmax()].to_frame().T
-        print(maxRecord)
-        agg_df = agg_df.reset_index()
-        minRecord = agg_df.ix[agg_df['value'].idxmin()].to_frame().T
-        print(minRecord)
+
         socketio.emit('chartdata', final_json)
         outText = "The " + xAxis + " " + str(maxRecord['label'].values[0]) + " has maximum " + yAxis + " while the " + xAxis + " " + str(minRecord['label'].values[0]) + " has minimum " + yAxis + ". Refer to the screen for more details."
+        # outText = "Refer to the screen for more details."
         # return {
         #     "speech": outText,
         #     "displayText": outText,
