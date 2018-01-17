@@ -193,6 +193,8 @@ def processRequest(req):
         incoming_query = req.get("request").get("intent").get("slots").get("message").get("value")
         print(incoming_query)
         chartType = req.get("request").get("intent").get("slots").get("charttypeslot").get("value")
+        if (chartType == "bar"):
+            chartType = "column2d"
         hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
         (input_sentence,OutMap) = hashMap_columns(str(incoming_query).lower(), hashColumn_csv)
         print(OutMap)
