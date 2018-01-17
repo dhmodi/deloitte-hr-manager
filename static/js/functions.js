@@ -133,7 +133,9 @@ $(document).ready(function() {
 							"showXAxisLine" : "1",
 							"xAxisLineThickness" : "1",
 							"xAxisLineColor" : "#999999",
-							"showAlternateHGridColor" : "0"                
+							"showAlternateHGridColor" : "0",
+							"width" : "800",
+							"height" : "500"
 						},
 						"data": chartdatum.source
 					}
