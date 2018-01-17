@@ -49,9 +49,19 @@ dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 conn = cx_Oracle.connect(user="C##DAOHCM", password="C##DAOHCM", dsn=dsnStr)
 print ("Using Database version:" + conn.version)
 
-@app.route('/speech')
-def speech():
+@app.route('/')
+def index():
     return redirect(url_for('static', filename='index.html'))
+
+
+# @app.route('/speech')
+# def speech():
+#     return redirect(url_for('static', filename='index.html'))
+
+# @app.route('/inventory')
+# def inventory():
+#     return redirect(url_for('static_url', filename='index.html'))
+
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
