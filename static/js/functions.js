@@ -102,8 +102,8 @@ $(document).ready(function() {
 					id:chartdatum.chartcontainer+"-",
 					renderer : 'javascript',
 					renderAt: chartdatum.chartcontainer,
-					width: "620",
-					height: "300",
+					width: "100%",
+					height: "500",
 					dataFormat: 'json',
 					dataSource:{
 						"chart": {
@@ -133,9 +133,7 @@ $(document).ready(function() {
 							"showXAxisLine" : "1",
 							"xAxisLineThickness" : "1",
 							"xAxisLineColor" : "#999999",
-							"showAlternateHGridColor" : "0",
-							"width" : "800",
-							"height" : "500"
+							"showAlternateHGridColor" : "0"
 						},
 						"data": chartdatum.source
 					}
