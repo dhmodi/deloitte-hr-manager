@@ -167,19 +167,6 @@ def processRequest(req):
                 if (isLast is not 0):
                     outText = outText + " and the "
                     count = count + 1
-        #print(','.join(str(element) for row in rows for element in row))
-
-
-        # return {
-        #     "speech": type,
-        #     "displayText": outText,
-        #     # "data": data,
-        #     # "contextOut": [],
-        #     "source": "Dhaval"
-        # }
-
-        # alexaResponse.get("response").get("outputSpeech").get("text")=outText
-        # alexaResponse.get("response").get("reprompt").get("outputSpeech").get("text")=outText
         print(outText)
         with open("response/alexa_response.json", 'r') as f:
             alexaResponse = json.load(f)
