@@ -5,7 +5,7 @@ person_id dao_hcm_w_employee_d,employees,employee,employes,employed
 headcount,head count
 state_name alexa_view,state
 country_code,country
-us,united states
+us,united states,u.s.
 au,australia
 de,germany
 jp,japan

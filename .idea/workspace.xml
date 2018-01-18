@@ -20,8 +20,8 @@
       <file leaf-file-name="synonyms.csv" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cognitiveSQL/alias/synonyms.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="9" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="9" />
+            <state relative-caret-position="147">
+              <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -543,13 +543,6 @@
       <option name="presentableId" value="Default" />
       <updated>1499410689410</updated>
     </task>
-    <task id="LOCAL-00091" summary="d">
-      <created>1513485978913</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1513485978914</updated>
-    </task>
     <task id="LOCAL-00092" summary="d">
       <created>1513491415417</created>
       <option name="number" value="00092" />
@@ -886,7 +879,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516293623566</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="d">
+      <created>1516295174048</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1516295174050</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1314,8 +1314,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cognitiveSQL/alias/synonyms.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="9" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="9" />
+        <state relative-caret-position="147">
+          <caret line="7" column="21" lean-forward="false" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding />
         </state>
       </provider>
