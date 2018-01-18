@@ -247,14 +247,6 @@ def processRequest(req):
         socketio.emit('chartdata', final_json)
         outText = "The " + xAxis + " " + str(maxRecord['label'].values[0]) + " has maximum " + yAxis + " while the " + xAxis + " " + str(minRecord['label'].values[0]) + " has minimum " + yAxis + ". Refer to the screen for more details."
         # outText = "Refer to the screen for more details."
-        # return {
-        #     "speech": outText,
-        #     "displayText": outText,
-        #     # "data": data,
-        #     # "contextOut": [],
-        #     "source": "Dhaval"
-        # }
-
         print(outText)
         with open("response/alexa_response.json", 'r') as f:
             alexaResponse = json.load(f)

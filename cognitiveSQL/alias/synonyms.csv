@@ -1,7 +1,7 @@
 sum,total number,how many
 nationality,can speak,speak,speaking
 no_of_positions dao_hcm_w_recruitment_d,job openings,open positions
-person_id dao_hcm_w_employee_d,employees,employee
+person_id dao_hcm_w_employee_d,employees,employee,employes
 state_name alexa_view,state
 country_code,country
 headcount alexa_view,headcount
