@@ -183,7 +183,7 @@ function loadVoices() {
 
 var recognition;
 nlp = window.nlp_compromise;
-var accessToken = "bc42b399e5a845df99644df738b1522c";
+var accessToken = "ded191608e1146ec917fa35b83d7c829";
 var baseUrl = "https://api.dialogflow.com/v1/";
 var messages = [], //array that hold the record of each string in chat
 lastUserMessage = "", //keeps track of the most recent input string from the user
