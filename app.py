@@ -32,17 +32,17 @@ socketio = SocketIO(app)
 parser = ""
 
 #### if WINDOWS
-import os
-currDir = os.getcwd()
-print(currDir)
-ORACLE_HOME = os.path.join(currDir,"lib")
-PATH = os.environ.get('PATH')
-os.environ['ORACLE_HOME'] = ORACLE_HOME
-os.environ['PATH'] = ORACLE_HOME + ";" + PATH
+# import os
+# currDir = os.getcwd()
+# print(currDir)
+# ORACLE_HOME = os.path.join(currDir,"lib")
+# PATH = os.environ.get('PATH')
+# os.environ['ORACLE_HOME'] = ORACLE_HOME
+# os.environ['PATH'] = ORACLE_HOME + ";" + PATH
 
 ### if LINUX
-# os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
-# subprocess.call(['sh','downloadLib.sh'])
+os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
+subprocess.call(['sh','downloadLib.sh'])
 
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
@@ -255,7 +255,7 @@ def processRequest(req):
             return alexaResponse
 
     elif is_Apiai_json == True:
-        if (req.get("result").get("action") == "inventory.search"):
+        if (req.get("result").get("action") == "hr.search"):
             print("Inventory Search")
             incoming_query = req.get("result").get("resolvedQuery")
             hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
@@ -375,7 +375,7 @@ def processRequest(req):
             }
 
 
-        elif (req.get("result").get("action") == "show.visualization"):
+        elif (req.get("result").get("action") == "hr.visualization"):
             print("Inventory Visualization")
             incoming_query = req.get("result").get("resolvedQuery")
             print(incoming_query)
