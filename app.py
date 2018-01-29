@@ -31,7 +31,7 @@ socketio = SocketIO(app)
 
 parser = ""
 
-#### if WINDOWS
+# ### if WINDOWS
 # import os
 # currDir = os.getcwd()
 # print(currDir)
@@ -40,7 +40,7 @@ parser = ""
 # os.environ['ORACLE_HOME'] = ORACLE_HOME
 # os.environ['PATH'] = ORACLE_HOME + ";" + PATH
 
-### if LINUX
+# ### if LINUX
 os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
 subprocess.call(['sh','downloadLib.sh'])
 
@@ -148,15 +148,33 @@ def processRequest(req):
                         column = OutMap.get(column)
                         whereValue1 = OutMap.get(whereValue[0]) if (OutMap.get(whereValue[0])) else whereValue[0]
                         whereColumn1 = OutMap.get(whereColumn[0]) if (OutMap.get(whereColumn[0])) else whereColumn[0]
-                        print(whereValue[1])
-                        print(whereColumn[1])
-                        whereValue2 = OutMap.get(whereValue[1]) if (OutMap.get(whereValue[1])) else whereValue[1]
-                        whereColumn2 = OutMap.get(whereColumn[1]) if (OutMap.get(whereColumn[1])) else whereColumn[1]
-                        if 'whereColumn' in locals():
-                            outText = str(column) + " " + value + " in the " + str(whereColumn1) + " " + str(
-                                whereValue1) + " has " + str(whereValue2) + " " + str(whereColumn2)
-                        else:
-                            outText = outText + str(column) + " is " + value
+                        try:
+                            print(whereValue[1])
+                            print(whereColumn[1])
+                            whereValue2 = OutMap.get(whereValue[1]) if (OutMap.get(whereValue[1])) else whereValue[1]
+                            whereColumn2 = OutMap.get(whereColumn[1]) if (OutMap.get(whereColumn[1])) else whereColumn[
+                                1]
+                            if 'whereColumn' in locals():
+                                outText = str(column) + " " + value + " in the " + str(whereColumn1) + " " + str(
+                                    whereValue1) + " has " + str(whereValue2) + " " + str(whereColumn2)
+                            else:
+                                outText = outText + str(column) + " is " + value
+
+                        except IndexError:
+                            if 'whereColumn' in locals():
+                                outText = str(column) + " " + value + " has " + str(whereValue1) + " " + str(
+                                    whereColumn1)
+                            else:
+                                outText = outText + str(column) + " is " + value
+                        # print(whereValue[1])
+                        # print(whereColumn[1])
+                        # whereValue2 = OutMap.get(whereValue[1]) if (OutMap.get(whereValue[1])) else whereValue[1]
+                        # whereColumn2 = OutMap.get(whereColumn[1]) if (OutMap.get(whereColumn[1])) else whereColumn[1]
+                        # if 'whereColumn' in locals():
+                        #     outText = str(column) + " " + value + " in the " + str(whereColumn1) + " " + str(
+                        #         whereValue1) + " has " + str(whereValue2) + " " + str(whereColumn2)
+                        # else:
+                        #     outText = outText + str(column) + " is " + value
                     elif (operation is "COUNT"):
                         table = OutMap.get(table)
                         print("The Operation is " + str(operation))
@@ -174,7 +192,8 @@ def processRequest(req):
                             outText = "There are " + value + " " + str(column) + " with " + str(whereValue[0]) + " " + str(
                                 whereColumn[0])
                         else:
-                            outText = "There are " + value + " " + str(column)
+                            #outText = "There are " + value + " " + str(column)
+                            outText = "The " + OutMap.get(str(operation).lower()).lower() + " " + str(column) + " is " + value
                     if (isLast is not 0):
                         outText = outText + " and the "
                         count = count + 1
@@ -260,6 +279,8 @@ def processRequest(req):
             incoming_query = req.get("result").get("resolvedQuery")
             hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
             (input_sentence, OutMap) = hashMap_columns(str(incoming_query).lower(), hashColumn_csv)
+            print(input_sentence)
+            print(OutMap)
             #print(query for query in queries)
             queries = parser.parse_sentence(input_sentence)
             queryString = ""
@@ -269,7 +290,7 @@ def processRequest(req):
                 columns = query.get_select().get_columns()
                 conditions = query.get_where().get_conditions()
                 queryString = queryString + str(query)
-
+            print("table:")
             print(table)
             print(list(columns))
             # xAxis = columns[0][0].split('.')[1]
@@ -312,15 +333,23 @@ def processRequest(req):
                         column = OutMap.get(column)
                         whereValue1 = OutMap.get(whereValue[0]) if (OutMap.get(whereValue[0])) else whereValue[0]
                         whereColumn1 = OutMap.get(whereColumn[0]) if (OutMap.get(whereColumn[0])) else whereColumn[0]
-                        print(whereValue[1])
-                        print(whereColumn[1])
-                        whereValue2 = OutMap.get(whereValue[1]) if (OutMap.get(whereValue[1])) else whereValue[1]
-                        whereColumn2 = OutMap.get(whereColumn[1]) if (OutMap.get(whereColumn[1])) else whereColumn[1]
-                        if 'whereColumn' in locals():
-                            outText = str(column) + " " + value + " in the " + str(whereColumn1) + " " + str(
-                                whereValue1) + " has " + str(whereValue2) + " " + str(whereColumn2)
-                        else:
-                            outText = outText + str(column) + " is " + value
+                        try:
+                            print(whereValue[1])
+                            print(whereColumn[1])
+                            whereValue2 = OutMap.get(whereValue[1]) if (OutMap.get(whereValue[1])) else whereValue[1]
+                            whereColumn2 = OutMap.get(whereColumn[1]) if (OutMap.get(whereColumn[1])) else whereColumn[1]
+                            if 'whereColumn' in locals():
+                                outText = str(column) + " " + value + " in the " + str(whereColumn1) + " " + str(
+                                    whereValue1) + " has " + str(whereValue2) + " " + str(whereColumn2)
+                            else:
+                                outText = outText + str(column) + " is " + value
+
+                        except IndexError:
+                            if 'whereColumn' in locals():
+                                outText = str(column) + " " + value + " has " + str(whereValue1) + " " + str(whereColumn1)
+                            else:
+                                outText = outText + str(column) + " is " + value
+
                     elif (operation is "COUNT"):
                         table = OutMap.get(table)
                         print("The Operation is " + str(operation))
@@ -338,7 +367,8 @@ def processRequest(req):
                             outText = "There are " + value + " " + str(column) + " with " + str(
                                 whereValue[0]) + " " + str(whereColumn[0])
                         else:
-                            outText = "There are " + value + " " + str(column)
+                            #outText = "There are " + value + " " + str(column)
+                            outText = "The " + OutMap.get(str(operation).lower()).lower() + " " + str(column) + " is " + value
                     if (isLast is not 0):
                         outText = outText + " and the "
                         count = count + 1

@@ -3,6 +3,8 @@ nationality,can speak,speak,speaking
 no_of_positions dao_hcm_w_recruitment_d,job openings,open positions
 person_id dao_hcm_w_employee_d,employees,employee,employes
 state_name alexa_view,state
+attrition_count attrition_view,attrition rate
+org_name attrition_view,department
 country_code,country
 headcount alexa_view,headcount
 us,united states
@@ -14,3 +16,4 @@ min,minimum,lowest,low,least
 max,maximum,max,highest,high,more
 recruiting_source,job source
 primary_skill,skills,skill
+
