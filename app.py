@@ -31,18 +31,18 @@ socketio = SocketIO(app)
 
 parser = ""
 
-# ### if WINDOWS
-# import os
-# currDir = os.getcwd()
-# print(currDir)
-# ORACLE_HOME = os.path.join(currDir,"lib")
-# PATH = os.environ.get('PATH')
-# os.environ['ORACLE_HOME'] = ORACLE_HOME
-# os.environ['PATH'] = ORACLE_HOME + ";" + PATH
+### if WINDOWS
+import os
+currDir = os.getcwd()
+print(currDir)
+ORACLE_HOME = os.path.join(currDir,"lib")
+PATH = os.environ.get('PATH')
+os.environ['ORACLE_HOME'] = ORACLE_HOME
+os.environ['PATH'] = ORACLE_HOME + ";" + PATH
 
-# ### if LINUX
-os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
-subprocess.call(['sh','downloadLib.sh'])
+# # ### if LINUX
+# os.environ['LD_LIBRARY_PATH'] = '/app/lib/'
+# subprocess.call(['sh','downloadLib.sh'])
 
 dsnStr = cx_Oracle.makedsn("129.158.70.122", "1521", "ORCL")
 
@@ -192,8 +192,11 @@ def processRequest(req):
                             outText = "There are " + value + " " + str(column) + " with " + str(whereValue[0]) + " " + str(
                                 whereColumn[0])
                         else:
-                            #outText = "There are " + value + " " + str(column)
-                            outText = "The " + OutMap.get(str(operation).lower()).lower() + " " + str(column) + " is " + value
+
+                            if "what" in incoming_query:
+                                outText = "The " + OutMap.get(str(operation).lower()).lower() + " " + str(column) + " is " + value
+                            elif "how" in incoming_query:
+                                outText = "There are " + value + " " + str(column)
                     if (isLast is not 0):
                         outText = outText + " and the "
                         count = count + 1
@@ -367,8 +370,10 @@ def processRequest(req):
                             outText = "There are " + value + " " + str(column) + " with " + str(
                                 whereValue[0]) + " " + str(whereColumn[0])
                         else:
-                            #outText = "There are " + value + " " + str(column)
-                            outText = "The " + OutMap.get(str(operation).lower()).lower() + " " + str(column) + " is " + value
+                            if "what" in incoming_query:
+                                outText = "The " + OutMap.get(str(operation).lower()).lower() + " " + str(column) + " is " + value
+                            elif "how" in incoming_query:
+                                outText = "There are " + value + " " + str(column)
                     if (isLast is not 0):
                         outText = outText + " and the "
                         count = count + 1
