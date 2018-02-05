@@ -416,7 +416,11 @@ def processRequest(req):
             print(incoming_query)
             chartType = req.get("result").get("parameters").get("chart-type")
             print(chartType)
-            queries = parser.parse_sentence(incoming_query.lower())
+            hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
+            (input_sentence, OutMap) = hashMap_columns(str(incoming_query).lower(), hashColumn_csv)
+            print(OutMap)
+            print(input_sentence)
+            queries = parser.parse_sentence(input_sentence)
             print(query for query in queries)
             queryString = ""
             table = ""
