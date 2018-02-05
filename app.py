@@ -418,7 +418,7 @@ def processRequest(req):
             chartType = req.get("result").get("parameters").get("chart-type")
             if (chartType == "bar"):
                 chartType = "column2d"
-            elif (chartType == "line "):
+            elif (chartType is None):
                 chartType = "line"
             hashColumn_csv = 'cognitiveSQL/alias/synonyms.csv'
             (input_sentence, OutMap) = hashMap_columns(str(incoming_query).lower(), hashColumn_csv)
