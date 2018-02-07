@@ -71,87 +71,137 @@ $(document).ready(function() {
 	  });
 
 	   //Socket io related code goes over here
-	   var socket = io.connect('https://deloitte-hr-manager.herokuapp.com');
-	   socket.on('chartdata',function(data){
-		   var chartdetail = JSON.parse(data);
-		   var length = chartdetail.length;
-		   var width = 600;
-		   var height=300;
-		   var chartdetail ;
-		  
-		//    $.each("chartdetail",function(index , value){
-		// 	  console.log(value);
-		// 	     // CreateChart(value);
-		//    });
-		chartdetail.forEach(function(val , index, theArray){				
-			CreateChart(val);
-			status = true;
-		});
-	
-		function CreateChart(data){
-			var chartdatum = data;	
-			//  if(length == 1){
-			// 	   width = 900;
-			// 	   height= 500;
-			//  }		
-			FusionCharts.setCurrentRenderer('javascript');			
-			FusionCharts.ready(function () {
-			//	console.log(typeof chartdatum);	
-				var visitChart = new FusionCharts({
-					type: chartdatum.type,
-					id:chartdatum.chartcontainer,
-					renderer : 'javascript',
-					renderAt: chartdatum.chartcontainer,
-					width: '1400px',
-					height: '700px',
-					dataFormat: 'json',
-					dataSource:{
-						"chart": {
-							"caption": chartdatum.caption,
-							"subCaption": chartdatum.subCaption,
-							"xAxisName": chartdatum.xAxisName,
-							"yAxisName": chartdatum.yAxisName,
-							"lineThickness" : "2",
-							"exportEnabled":'1',
-							"paletteColors" : "#009688",
-							"baseFontColor" : "#333333",
-							"baseFont" : "Helvetica Neue,Arial",
-							"captionFontSize" : "14",
-							"subcaptionFontSize" : "14",
-							"subcaptionFontBold" : "0",
-							"showBorder" : "0",
-							"bgColor" : "#ffffff",
-							"showShadow" : "0",
-							"canvasBgColor" : "#ffffff",
-							"canvasBorderAlpha" : "0",
-							"divlineAlpha" : "100",
-							"divlineColor" : "#999999",
-							"divlineThickness" : "1",
-							"divLineIsDashed" : "1",
-							"divLineDashLen" : "1",
-							"divLineGapLen" : "1",
-							"showXAxisLine" : "1",
-							"xAxisLineThickness" : "1",
-							"xAxisLineColor" : "#999999",
-							"showAlternateHGridColor" : "0"
-						},
-						"data": chartdatum.source
-					}
-				});
-			//	var chartObject= FusionCharts(chartdatum.id);
-			//chartdetail.push( visitChart.getData());
-			console.log(visitChart);
-				visitChart.render();
-				$('#chartshow')[0].scrollIntoView(true);
-			});
-		
-		   
-	   }
-	   $(".panel-heading").css("display","inline-block");  
-	 //  console.log(chartdetail); 
-		});
-		
-	});
+var socket = io.connect('https://deloitte-hr-manager.herokuapp.com');
+//var socket = io.connect('localhost');
+socket.on('chartdata',function(data){
+      var chartdetail = JSON.parse(data);
+      var length = chartdetail.length;
+      var width = 600;
+      var height=300;
+      var chartdetail ;
+
+   //    $.each("chartdetail",function(index , value){
+   // 	  console.log(value);
+   // 	     // CreateChart(value);
+   //    });
+       chartdetail.forEach(function(val , index, theArray){
+                  CreateChart(val);
+                  status = true;
+              });
+
+       function CreateChart(data){
+           var chartdatum = data;
+           //  if(length == 1){
+           // 	   width = 900;
+           // 	   height= 500;
+           //  }
+           FusionCharts.setCurrentRenderer('javascript');
+           FusionCharts.ready(function () {
+           //	console.log(typeof chartdatum);
+               var visitChart = new FusionCharts({
+                   type: chartdatum.type,
+                   id:chartdatum.chartcontainer,
+                   renderer : 'javascript',
+                   renderAt: chartdatum.chartcontainer,
+                   width: '1400px',
+                   height: '700px',
+                   dataFormat: 'json',
+                   dataSource:{
+                       "chart": {
+                           "caption": chartdatum.caption,
+                           "subCaption": chartdatum.subCaption,
+                           "xAxisName": chartdatum.xAxisName,
+                           "yAxisName": chartdatum.yAxisName,
+                           "lineThickness" : "2",
+                           "exportEnabled":'1',
+                           "paletteColors" : "#009688",
+                           "baseFontColor" : "#333333",
+                           "baseFont" : "Helvetica Neue,Arial",
+                           "captionFontSize" : "14",
+                           "subcaptionFontSize" : "14",
+                           "subcaptionFontBold" : "0",
+                           "showBorder" : "0",
+                           "bgColor" : "#ffffff",
+                           "showShadow" : "0",
+                           "canvasBgColor" : "#ffffff",
+                           "canvasBorderAlpha" : "0",
+                           "divlineAlpha" : "100",
+                           "divlineColor" : "#999999",
+                           "divlineThickness" : "1",
+                           "divLineIsDashed" : "1",
+                           "divLineDashLen" : "1",
+                           "divLineGapLen" : "1",
+                           "showXAxisLine" : "1",
+                           "xAxisLineThickness" : "1",
+                           "xAxisLineColor" : "#999999",
+                           "showAlternateHGridColor" : "0"
+                       },
+                       "data": chartdatum.source
+                   }
+               });
+           //	var chartObject= FusionCharts(chartdatum.id);
+           //chartdetail.push( visitChart.getData());
+           console.log(visitChart);
+               visitChart.render();
+               $('#chartshow')[0].scrollIntoView(true);
+           });
+       }
+       $(".panel-heading").css("display","inline-block");
+       //  console.log(chartdetail);
+       });
+
+
+
+socket.on('chartgoogledata',function(data){
+   var chartdetail = JSON.parse(data);
+   var length = chartdetail.length;
+   var width = 600;
+   var height=300;
+   var chartdetail ;
+
+//    $.each("chartdetail",function(index , value){
+// 	  console.log(value);
+// 	     // CreateChart(value);
+//    });
+    chartdetail.forEach(function(val , index, theArray){
+               CreateGoogleChart(val);
+               status = true;
+           });
+
+    function CreateGoogleChart(data){
+        var chartdatum = data;
+        //  if(length == 1){
+        // 	   width = 900;
+        // 	   height= 500;
+        //  }
+  google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Popularity'],
+          ['Germany', 200],
+          ['United States', 300],
+          ['Brazil', 400],
+          ['Canada', 500],
+          ['France', 600],
+          ['RU', 700]
+        ]);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('barchart'));
+
+        chart.draw(data, options);
+      }
+    }
+    });
+       });
 function loadVoices() {
 	// Fetch the available voices.
 	var voices = speechSynthesis.getVoices();
